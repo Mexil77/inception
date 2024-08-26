@@ -1,0 +1,11 @@
+version: '3'
+services:
+  nginx:
+    container_name: nginx_test_container
+    build: ./src
+    image: nginx:test
+    ports:
+      - "8080:80"
+    # volumes:
+    #   - index.html/:usr/share/nginx/html
+    restart: always
