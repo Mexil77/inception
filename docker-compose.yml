@@ -1,39 +1,30 @@
-# version: '3'
+version: '3'
 services:
-  db:
-    image: mariadb:10
-    volumes:
-      - data:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-  
-  web:
-    image: wordpress:6
-    depends_on:
-      - db
-    volumes:
-      - data-wp:/var/www/html
-    environment:
-      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
-      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
-      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
-    ports:
+  nginx:
+    build: src/nginx/.
+    container_name: nginx
+    ports: 
       - 8080:80
-
-volumes:
-  data:
-  data-wp:
-
-  # server:
-  #   container_name: nginx_test_container
-  #   build: ./src
-  #   image: nginx:test
-  #   ports:
-  #     - "8080:80"
-    # volumes:
-    #   - index.html/:usr/share/nginx/html
-    # restart: always
+    volumes:
+      - ./web:/var/www/html
+    depends_on:
+      - wordpress
+      - mariadb
+    networks:
+      - inception
+  wordpress:
+    build: src/wordpress/.
+    container_name: wp-php
+    volumes:
+      - ./web:/var/www/html
+    depends_on:
+      - mariadb
+    networks:
+      - inception
+  mariadb:
+    build: src/mariadb/.
+    container_name: mariadb
+    networks:
+      - inception
+networks:
+  inception:
