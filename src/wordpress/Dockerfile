@@ -4,7 +4,6 @@ RUN apt update && apt install php-fpm php-mysql curl -y
 
 COPY www.conf /etc/php/8.2/fpm/pool.d/.
 COPY script.sh .
-# COPY wp-config.php .
 
 RUN chmod +x script.sh
 
