@@ -1,5 +1,8 @@
 all: up
 
+volume:
+	mkdir -p /home/emgarcia/data/wordpress /home/emgarcia/data/mariadb
+
 up:
 	docker compose up --build
 down:
