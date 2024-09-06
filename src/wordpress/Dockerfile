@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:buster
 
 RUN apt update && apt install php-fpm php-mysql curl -y
 
