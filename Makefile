@@ -4,9 +4,9 @@ volume:
 	mkdir -p /home/emgarcia/data/wordpress /home/emgarcia/data/mariadb
 
 up:
-	docker compose up --build
+	sudo docker compose -f ./srcs/docker-compose.yml up --build
 down:
-	docker compose down
+	sudo docker compose -f ./srcs/docker-compose.yml down
 fclean: down
 	sudo rm -rf /home/emgarcia/data/wordpress /home/emgarcia/data/mariadb
 	sudo docker volume rm $(shell docker volume ls -q)
