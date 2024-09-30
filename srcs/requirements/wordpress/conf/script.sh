@@ -1,13 +1,6 @@
 #!/bin/sh
 cd /var/www/html
 
-#check existing wordpress
-# if [ -f "/wordpress/wp.phar-config.php" ]; 
-# then
-#     wp.phar config delete --path=/wordpress/
-#     rm -rf /wordpress/* /usr/local/bin/wp.phar
-# fi
-
 curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 chmod +x wp-cli.phar
 

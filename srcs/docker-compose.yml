@@ -12,6 +12,8 @@ services:
     networks:
       - inception
     restart: on-failure
+    env_file:
+      - .env
   wordpress:
     build: requirements/wordpress/.
     container_name: wordpress
@@ -31,6 +33,8 @@ services:
       - inception
     volumes:
       - mariadb:/var/lib/mysql
+    env_file:
+      - .env
     restart: on-failure
 networks:
   inception:
