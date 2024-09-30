@@ -11,6 +11,7 @@ services:
       - wordpress
     networks:
       - inception
+    restart: on-failure
   wordpress:
     build: src/wordpress/.
     container_name: wp-php
@@ -22,6 +23,7 @@ services:
       - mariadb
     networks:
       - inception
+    restart: on-failure
   mariadb:
     build: src/mariadb/.
     container_name: mariadb
@@ -29,7 +31,7 @@ services:
       - inception
     volumes:
       - mariadb:/var/lib/mysql
-    restart: always
+    restart: on-failure
 networks:
   inception:
 
